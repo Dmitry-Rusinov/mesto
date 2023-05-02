@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Третий проект Яндекс.Практикум "Место"</title>
+  </head>
+  <body class="page">
+    <div class="content">
+      <header class="header">
+        <img
+          src="./images/logo.svg"
+          alt="Логотип проекта Место.Россия"
+          class="header__logo"
+        />
+        <div class="header__line"></div>
+      </header>
+      <main>
+        <section class="profile">
+          <img
+            src="./images/image.jpg"
+            alt="Фотография пользователя"
+            class="profile__avatar"
+          />
+          <article class="profile__info">
+            <h1 class="profile__info-title">Жак-Ив Кусто</h1>
+            <button
+              type="button"
+              title="Кнопка редактирования профиля"
+              class="profile__edit-button profile__popup-opened"
+            ></button>
+            <p class="profile__subtitle">Исследователь океана</p>
+          </article>
+          <button
+            type="button"
+            title="Кнопка добавления фото-карточки"
+            class="profile__add-button"
+          ></button>
+        </section>
+        <section class="elements">
+          <ul class="element">
+            <li class="element__card-content">
+              <img
+                src="./images/andrea-de-santis-Hu1ixxtInvs-unsplash.jpg"
+                alt="Абстрактная многоярусная лестница"
+                class="element__picture"
+              />
+              <div class="element__container">
+                <h2 class="element__title">Лестница</h2>
+                <button
+                  type="button"
+                  title="Кнопка лайка картинки"
+                  class="element__button-like"
+                ></button>
+              </div>
+            </li>
+            <li class="element__card-content">
+              <img
+                src="./images/david-becker-pEqvRg-o-PY-unsplash.jpg"
+                alt="Северное сияние"
+                class="element__picture"
+              />
+              <div class="element__description">
+                <div class="element__container">
+                  <h2 class="element__title">Северное сияние</h2>
+                  <button
+                    type="button"
+                    title="Кнопка лайка картинки"
+                    class="element__button-like"
+                  ></button>
+                </div>
+              </div>
+            </li>
+            <li class="element__card-content">
+              <img
+                src="./images/hamdhulla-shakeeb-S98UHzzXq_E-unsplash.jpg"
+                alt="Пляж с пальмами и голубой водой"
+                class="element__picture"
+              />
+              <div class="element__description">
+                <div class="element__container">
+                  <h2 class="element__title">Пляж</h2>
+                  <button
+                    type="button"
+                    title="Кнопка лайка картинки"
+                    class="element__button-like"
+                  ></button>
+                </div>
+              </div>
+            </li>
+            <li class="element__card-content">
+              <img
+                src="./images/josh-hild-znpfVkfxRgk-unsplash.jpg"
+                alt="Девушка с удивленным взглядом в поле цветов"
+                class="element__picture"
+              />
+              <div class="element__description">
+                <div class="element__container">
+                  <h2 class="element__title">Девушка в цветах</h2>
+                  <button
+                    type="button"
+                    title="Кнопка лайка картинки"
+                    class="element__button-like"
+                  ></button>
+                </div>
+              </div>
+            </li>
+            <li class="element__card-content">
+              <img
+                src="./images/mat-5DDrT2ioNuI-unsplash.jpg"
+                alt="Римские колонны"
+                class="element__picture"
+              />
+              <div class="element__description">
+                <div class="element__container">
+                  <h2 class="element__title">Римские колонны</h2>
+                  <button
+                    type="button"
+                    title="Кнопка лайка картинки"
+                    class="element__button-like"
+                  ></button>
+                </div>
+              </div>
+            </li>
+            <li class="element__card-content">
+              <img
+                src="./images/shana-van-roosbroek-nkS1Y4KsEAw-unsplash.jpg"
+                alt="Доски для серфинга на пляже"
+                class="element__picture"
+              />
+              <div class="element__description">
+                <div class="element__container">
+                  <h2 class="element__title">Серфинг</h2>
+                  <button
+                    type="button"
+                    title="Кнопка лайка картинки"
+                    class="element__button-like"
+                  ></button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__text">© 2023 Mesto Russia</p>
+      </footer>
+    </div>
+    <div class="popup">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <input type="button" class="popup__closed" value="Кнопка закрытия формы"></input>
+        <form name="form" class="popup__form">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <fieldset class="popup__content">
+              <input
+                class="popup__input popup__input_name"
+                type="text"
+                id="user-name"
+                placeholder="Как вас зовут?"
+                minlength="3"
+                maxlength="20"
+              />
+              <input
+                class="popup__input popup__input_job"
+                type="text"
+                id="description"
+                placeholder="Дополнитерьная информация"
+                minlength="3"
+                maxlength="40"
+              />
+              <button type="submit" class="popup__submit" value="eddit">
+                Сохранить
+              </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <script src="./blocks/scripts/index.js"></script>
+  </body>
+</html>
