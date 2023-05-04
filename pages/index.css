@@ -39,4 +39,3 @@
 @import url(../blocks/popup/__content/popup__content.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__closed/popup__closed.css);
-* {outline: 1px solid green;}
