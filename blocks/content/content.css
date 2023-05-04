@@ -12,8 +12,8 @@
 }
 @media screen and (max-width: 768px) {
   .content {
-    max-width: calc(768px - 2 * 10%);
-    width: calc(100% - 2 * 10%);
+    max-width: calc(768px - 2 * 6%);
+    width: calc(100% - 2 * 6%);
     margin: 28px auto 36px;
   }
 }

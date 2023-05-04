@@ -1,4 +1,4 @@
-.element {
+.elements__card {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -8,14 +8,14 @@
   padding: 0;
 }
 @media screen and (max-width: 1279px) {
-.element {
+.elements__card {
   grid-template-columns: repeat(2, 1fr);
   max-width: max-content;
   margin: 0 auto;
 }
 }
 @media screen and (max-width: 980px) {
-  .element {
+  .elements__card {
     grid-template-columns: 1fr;
   }
 }

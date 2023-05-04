@@ -1,4 +1,4 @@
-.element__button-like {
+.elements__button-like {
   background-image: url(../../../images/botton-like.svg);
   width: 22px;
   height: 19px;
@@ -7,10 +7,10 @@
   cursor: pointer;
   transition: opacity .6s;
 }
-.element__button-like:hover {
+.elements__button-like:hover {
   opacity: .5;
 }
-.element__button-like:active {
-  background-image: url(../../../images/button-like-active.png);
+.elements__button-like:active {
+  background-image: url(../../../images/button-like-active.svg);
   opacity: 1;
 }

@@ -14,7 +14,6 @@
           alt="Логотип проекта Место.Россия"
           class="header__logo"
         />
-        <div class="header__line"></div>
       </header>
       <main>
         <section class="profile">
@@ -23,15 +22,15 @@
             alt="Фотография пользователя"
             class="profile__avatar"
           />
-          <article class="profile__info">
+          <div class="profile__info">
             <h1 class="profile__info-title">Жак-Ив Кусто</h1>
             <button
               type="button"
               title="Кнопка редактирования профиля"
-              class="profile__edit-button profile__popup-opened"
+              class="profile__edit-button"
             ></button>
             <p class="profile__subtitle">Исследователь океана</p>
-          </article>
+          </div>
           <button
             type="button"
             title="Кнопка добавления фото-карточки"
@@ -39,103 +38,105 @@
           ></button>
         </section>
         <section class="elements">
-          <ul class="element">
-            <li class="element__card-content">
+          <ul class="elements__card">
+            <li class="elements__card-content">
               <img
                 src="./images/andrea-de-santis-Hu1ixxtInvs-unsplash.jpg"
                 alt="Абстрактная многоярусная лестница"
-                class="element__picture"
+                class="elements__picture"
               />
-              <div class="element__container">
-                <h2 class="element__title">Лестница</h2>
-                <button
-                  type="button"
-                  title="Кнопка лайка картинки"
-                  class="element__button-like"
-                ></button>
+              <div class="elements__description">
+                <div class="elements__container">
+                  <h2 class="elements__title">Лестница</h2>
+                  <button
+                    type="button"
+                    title="Кнопка лайка картинки"
+                    class="elements__button-like"
+                  ></button>
+                </div>
               </div>
             </li>
-            <li class="element__card-content">
+            <li class="elements__card-content">
               <img
                 src="./images/david-becker-pEqvRg-o-PY-unsplash.jpg"
                 alt="Северное сияние"
-                class="element__picture"
+                class="elements__picture"
               />
-              <div class="element__description">
-                <div class="element__container">
-                  <h2 class="element__title">Северное сияние</h2>
+              <div class="elements__description">
+                <div class="elements__container">
+                  <h2 class="elements__title">Северное сияние</h2>
                   <button
                     type="button"
                     title="Кнопка лайка картинки"
-                    class="element__button-like"
+                    class="elements__button-like"
                   ></button>
                 </div>
               </div>
             </li>
-            <li class="element__card-content">
+            <li class="elements__card-content">
               <img
                 src="./images/hamdhulla-shakeeb-S98UHzzXq_E-unsplash.jpg"
                 alt="Пляж с пальмами и голубой водой"
-                class="element__picture"
+                class="elements__picture"
               />
-              <div class="element__description">
-                <div class="element__container">
-                  <h2 class="element__title">Пляж</h2>
+              <div class="elements__description">
+                <div class="elements__container">
+                  <h2 class="elements__title">Пляж</h2>
                   <button
                     type="button"
                     title="Кнопка лайка картинки"
-                    class="element__button-like"
+                    class="elements__button-like"
                   ></button>
                 </div>
               </div>
             </li>
-            <li class="element__card-content">
+            <li class="elements__card-content">
               <img
                 src="./images/josh-hild-znpfVkfxRgk-unsplash.jpg"
                 alt="Девушка с удивленным взглядом в поле цветов"
-                class="element__picture"
+                class="elements__picture"
               />
-              <div class="element__description">
-                <div class="element__container">
-                  <h2 class="element__title">Девушка в цветах</h2>
+              <div class="elements__description">
+                <div class="elements__container">
+                  <h2 class="elements__title">Девушка в цветах</h2>
                   <button
                     type="button"
                     title="Кнопка лайка картинки"
-                    class="element__button-like"
+                    class="elements__button-like"
                   ></button>
                 </div>
               </div>
             </li>
-            <li class="element__card-content">
+            <li class="elements__card-content">
               <img
                 src="./images/mat-5DDrT2ioNuI-unsplash.jpg"
                 alt="Римские колонны"
-                class="element__picture"
+                class="elements__picture"
               />
-              <div class="element__description">
-                <div class="element__container">
-                  <h2 class="element__title">Римские колонны</h2>
+              <div class="elements__description">
+                <div class="elements__container">
+                  <h2 class="elements__title">Римские колонны</h2>
                   <button
                     type="button"
                     title="Кнопка лайка картинки"
-                    class="element__button-like"
+                    class="elements__button-like"
                   ></button>
                 </div>
               </div>
             </li>
-            <li class="element__card-content">
+            <li class="elements__card-content">
               <img
                 src="./images/shana-van-roosbroek-nkS1Y4KsEAw-unsplash.jpg"
                 alt="Доски для серфинга на пляже"
-                class="element__picture"
+                class="elements__picture"
               />
-              <div class="element__description">
-                <div class="element__container">
-                  <h2 class="element__title">Серфинг</h2>
+              <div class="elements__description">
+                <div class="elements__container">
+                  <h2 class="elements__title">Серфинг</h2>
                   <button
                     type="button"
                     title="Кнопка лайка картинки"
-                    class="element__button-like"
+                    class="elements__button-like"
                   ></button>
                 </div>
               </div>
@@ -148,35 +149,40 @@
       </footer>
     </div>
     <div class="popup">
-      <div class="popup__overlay"></div>
       <div class="popup__container">
-        <input type="button" class="popup__closed" value="Кнопка закрытия формы">
+        <button
+          type="button"
+          class="popup__closed"
+          title="Кнопка закрытия формы"
+        ></button>
         <form name="form" class="popup__form">
           <h2 class="popup__title">Редактировать профиль</h2>
           <fieldset class="popup__content">
-              <input
-                class="popup__input popup__input_name"
-                type="text"
-                id="user-name"
-                placeholder="Как вас зовут?"
-                minlength="3"
-                maxlength="20"
-              />
-              <input
-                class="popup__input popup__input_job"
-                type="text"
-                id="description"
-                placeholder="Дополнитерьная информация"
-                minlength="3"
-                maxlength="40"
-              />
-              <button type="submit" class="popup__submit" value="eddit">
-                Сохранить
-              </button>
+            <input
+              class="popup__input popup__input_user_name"
+              type="text"
+              id="user-name"
+              placeholder="Как вас зовут?"
+              minlength="1"
+              maxlength="200"
+              name="name"
+            />
+            <input
+              class="popup__input popup__input_user_job"
+              type="text"
+              id="description"
+              placeholder="Дополнитерьная информация"
+              minlength="1"
+              maxlength="400"
+              name="job"
+            />
           </fieldset>
+          <button type="submit" class="popup__submit" value="eddit">
+            Сохранить
+          </button>
         </form>
       </div>
     </div>
-    <script src="./blocks/scripts/index.js"></script>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
