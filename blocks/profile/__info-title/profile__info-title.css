@@ -11,6 +11,13 @@
   overflow: hidden;
   vertical-align: baseline;
 }
+
+@media screen and (max-width: 980px) {
+  .profile__info-title {
+    text-align: center;
+  }
+}
+
 @media screen and (max-width: 425px) {
   .profile__info-title {
     font-size: 27px;

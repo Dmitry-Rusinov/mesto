@@ -7,11 +7,13 @@
   box-sizing: border-box;
   max-width: 336px;
 }
+
 @media screen and (max-width: 980px) {
   .profile__info {
     margin: 0 auto 36px;
   }
 }
+
 @media screen and (max-width: 425px) {
   .profile__info {
     grid-template-columns: 1fr 18px;

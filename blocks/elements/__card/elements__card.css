@@ -7,13 +7,15 @@
   margin: 0;
   padding: 0;
 }
+
 @media screen and (max-width: 1279px) {
-.elements__card {
-  grid-template-columns: repeat(2, 1fr);
-  max-width: max-content;
-  margin: 0 auto;
+  .elements__card {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: max-content;
+    margin: 0 auto;
+  }
 }
-}
+
 @media screen and (max-width: 980px) {
   .elements__card {
     grid-template-columns: 1fr;
