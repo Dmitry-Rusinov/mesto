@@ -34,6 +34,9 @@ formElement.addEventListener('submit', handleFormSubmit);
 
 const elementsCard = document.querySelector('.elements__card');
 const templateCard = document.querySelector('#template-card').content;
+//const elementsPicture = document.querySelector('.elements__picture');
+//const elementsTitle = document.querySelector('.elements__title');
+
 
 const initialCards = [
   {
