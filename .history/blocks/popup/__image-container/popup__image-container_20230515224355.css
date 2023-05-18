@@ -1,0 +1,6 @@
+.popup__image-container {
+  display: flex;
+  position: relative;
+  width: 816px;
+  height: 540px;
+}

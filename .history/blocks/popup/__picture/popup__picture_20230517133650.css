@@ -1,0 +1,8 @@
+.popup__picture {
+  background-position: center;
+  object-fit: cover;
+  overflow: hidden;
+  z-index: 2;
+  width: 75vw;
+  height: 75vh;
+}
