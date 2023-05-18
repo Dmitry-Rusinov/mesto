@@ -15,7 +15,6 @@
     height: 75vh;
   }
 }
-
 @media screen and (max-width: 320px) {
   .popup__image-container {
     width: 240px;
