@@ -8,7 +8,6 @@
   height: 540px;
   margin: 0 auto;
 }
-
 @media screen and (max-width: 1279px) {
   .popup__image-container {
     width: 75vw;
