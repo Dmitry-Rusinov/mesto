@@ -8,20 +8,27 @@ const nameInput = document.querySelector('.popup__input_user_name');
 const jobInput = document.querySelector('.popup__input_user_job');
 const newNameInput = document.querySelector('.profile__info-title');
 const newJobInput = document.querySelector('.profile__subtitle');
+
+//Добавление карточек на страницу
 const elementsCard = document.querySelector('.elements__card');
 const templateCard = document.querySelector('#template-card').content;
+
+//Попап добавления карточки
+const popupImageContent = document.querySelectorAll('.elements__card-content');
 const popupAddButton = document.querySelector('.profile__add-button');
 const cardDescription = document.querySelector('#card-description');
 const picturesLink = document.querySelector('#pictures-link');
 const popupAddCard = document.querySelector('#popupAddCard');
-const popupAddCardButtonClosed = popupAddCard.querySelector('.popup__closed');
+const newPopupButtonClosed = popupAddCard.querySelector('.popup__closed');
 const addCardForm = popupAddCard.querySelector('.popup__form');
+//Попап изображения карточки при увеличении
 const modalImage = document.querySelector('#popupImage');
-const modalImageButtonClosed = modalImage.querySelector('.popup__closed');
+const closeBtn = modalImage.querySelector('.popup__closed');
 const newImage = modalImage.querySelector('.popup__picture');
 const newImageTitle = modalImage.querySelector('.popup__image-title');
 
-//Реализация формы редактирования профиля
+
+//Реализация формы редактирования профиль
 const togglePopupState = (popupToToggle) => popupToToggle.classList.toggle('popup_opened');
 
 buttonPopupOpen.addEventListener('click', () => {
@@ -85,7 +92,7 @@ const buttonLike = (evt) => {
   const item = evt.target.closest('.elements__button-like');
   item.classList.toggle('elements__button-like_active');
 }
-//Функция наполнения карточки
+
 function prepareCardContent(title, link, description) { 
   const changedElements = templateCard.querySelector('.elements__card-content').cloneNode(true);
   const elementsPicture = changedElements.querySelector('.elements__picture');
@@ -104,7 +111,10 @@ function prepareCardContent(title, link, description) {
   elementsCard.prepend(changedElements);
 }
 
-//Функция добавления карточек из JS
+/*function createCard(elementsInfo) {  
+	prepareCardContent(elementsInfo.name, elementsInfo.link, elementsInfo.name);
+}*/
+
 function createCard() {
   elementsInfo.forEach((elementsInfo) =>  
     prepareCardContent(elementsInfo.name, elementsInfo.link, elementsInfo.name)
@@ -118,9 +128,10 @@ popupAddButton.addEventListener('click', () => {
   togglePopupState(popupAddCard);
 });
 
-popupAddCardButtonClosed.addEventListener('click', () => togglePopupState(popupAddCard));
+newPopupButtonClosed.addEventListener('click', () => togglePopupState(popupAddCard));
 
 //Функция добавления карточки
+
 function addCardSubmit (evt) {
   evt.preventDefault();
   prepareCardContent(cardDescription.value, picturesLink.value, cardDescription.value);  
@@ -130,4 +141,4 @@ function addCardSubmit (evt) {
 addCardForm.addEventListener('submit', addCardSubmit);
 
 //Кнопка закрытия модального окна изображения
-modalImageButtonClosed.addEventListener('click', () => togglePopupState(modalImage));
+closeBtn.addEventListener('click', () => togglePopupState(modalImage));
