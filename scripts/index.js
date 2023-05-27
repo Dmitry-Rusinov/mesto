@@ -20,15 +20,7 @@ const modalImageButtonClosed = modalImage.querySelector('.popup__closed');
 const image = modalImage.querySelector('.popup__picture');
 const imageTitle = modalImage.querySelector('.popup__image-title');
 const popupInput = formEditProfile.querySelector('.popup__input');
-
-/*const formSubmitButtonChangeState = (form) => {
-  const submitButton = form.querySelector('.popup__submit');
-  if (!form.checkValidity()) {
-    submitButton.setAttribute('disabled', true);
-  } else {
-    submitButton.removeAttribute('disabled');
-  }
-}*/
+//const buttonSubmitForm = document.querySelector('.popup__submit');
 
 
 //Реализация формы редактирования профиля
@@ -50,23 +42,8 @@ function submitEditProfileForm (evt) {
     evt.preventDefault(); 
     userName.textContent = inputNameField.value;
     userJob.textContent = inputJobField.value;
-/*
-    const form = evt.target;
-    if (!form.checkValidity()) {
-      console.log('good');
-    } else {
-      console.log('no good');
-    }
-*/
     closePopup(popupEditProfile);
 }
-
-formEditProfile.addEventListener('input', (evt) => {
-  const input = evt.target;
-  const form = evt.currentTarget;
-  isValid(input);
-  /*formSubmitButtonChangeState(form);*/
-}/*true*/);
 
 formEditProfile.addEventListener('submit', submitEditProfileForm);
 
@@ -126,6 +103,8 @@ popupAddCardButtonClosed.addEventListener('click', () => closePopup(popupAddCard
 function submitAddCard (evt) {
   evt.preventDefault();
   const cardContentAdd = createCard(inputCardDescription.value, inputPictureLink.value, inputCardDescription.value);
+  const buttonSubmitForm = popupAddCard.querySelector('.popup__submit');
+  buttonSubmitForm.setAttribute('disabled', true);
   elementsCard.prepend(cardContentAdd);
   closePopup(popupAddCard);
   evt.target.reset();
@@ -136,47 +115,68 @@ addCardForm.addEventListener('submit', submitAddCard);
 //Кнопка закрытия модального окна изображения
 modalImageButtonClosed.addEventListener('click', () => closePopup(modalImage));
 
-popupInput.addEventListener('input', function (evt) {
-  console.log(evt.target.validity.valid);
-});
-
-//const formError = formEditProfile.querySelector(`.${popupInput.id}-error`);
-
-const showInputError = (formEditProfile, popupInput, errorMessage) => {
-  const errorElement = formEditProfile.querySelector(`.${popupInput.id}-error`);
-  popupInput.classList.add('popup__input_type_error');
+//Функция отвечает за показ ошибки
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('popup__input_type_error');
   errorElement.textContent = errorMessage;
   errorElement.classList.add('form__input-error_active');
 }
 
-const hideInputError = (formEditProfile, popupInput) => {
-  const errorElement = formEditProfile.querySelector(`.${popupInput.id}-error`);
-  popupInput.classList.remove('popup__input_type_error');
+//Функция отвечает за скрытие ошибки
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('popup__input_type_error');
   errorElement.classList.remove('form__input-error_active');
   errorElement.textContent = '';
 };
 
-const isValid = (formEditProfile, popupInput) => {
-  if (!popupInput.validity.valid) {
-    // Если поле не проходит валидацию, покажем ошибку
-    showInputError(formEditProfile, popupInput, popupInput.validationMessage);
+//Функция проверяет валидацию полей в форме 
+//и вызывает или скрывает сообщение об ошибке
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    // Если проходит, скроем
-    hideInputError(formEditProfile, popupInput);
+    hideInputError(formElement, inputElement);
   }
 };
 
-const setEventListeners = (formEditProfile) => {
-  const inputList = Array.from(formEditProfile.querySelectorAll('.popup__input'));
-  inputList.forEach((popupInput) => {
-    popupInput.addEventListener('input', () => isValid(formEditProfile, popupInput))
+const setEventListeners = (formElement) => {
+  
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  const buttonSubmitForm = formElement.querySelector('.popup__submit');
+  
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', function () {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonSubmitForm)
+    });
   });
 }
 
-const enableValidation = () => {
+function validationCheck () {
   const formList = Array.from(document.querySelectorAll('.popup__form'));
-  formList.forEach((formEditProfile) => setEventListeners(formEditProfile));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
 }
 
-enableValidation();
+validationCheck();
 
+//Функция обходит массив полей и проверяет их на валидацию
+function hasInvalidInput (inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+//Функция отвечает за блокировку кнопки Submit
+function toggleButtonState (inputList, buttonSubmitForm) {
+  if (hasInvalidInput(inputList)) {
+    buttonSubmitForm.setAttribute('disabled', true);
+  } else {
+    buttonSubmitForm.removeAttribute('disabled');
+  }
+}
