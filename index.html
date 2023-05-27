@@ -74,26 +74,34 @@
           title="Кнопка закрытия формы"
         ></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form name="form" class="popup__form">
+        <form name="form" class="popup__form" novalidate>
           <fieldset class="popup__content">
+            <lable class="popup__input-field">
             <input
               class="popup__input popup__input_user_name"
               type="text"
               id="user-name"
               placeholder="Как вас зовут?"
-              minlength="1"
-              maxlength="200"
+              minlength="2"
+              maxlength="40"
               name="name"
+              required
             />
+            <span class="popup__input-error user-name-error"></span>
+          </lable>
+          <lable class="popup__input-field">
             <input
               class="popup__input popup__input_user_job"
               type="text"
               id="description"
               placeholder="Дополнитерьная информация"
-              minlength="1"
-              maxlength="400"
+              minlength="2"
+              maxlength="200"
               name="job"
+              required
             />
+            <span class="popup__input-error description-error"></span>
+          </lable>
           </fieldset>
           <button type="submit" class="popup__submit" value="eddit">
             Сохранить
@@ -116,9 +124,10 @@
               id="card-description"
               type="text"
               placeholder="Название"
-              minlength="1"
-              maxlength="200"
+              minlength="2"
+              maxlength="30"
               name="newPlace"
+              required
             />
             <input
               class="popup__input"
@@ -128,6 +137,7 @@
               minlength="1"
               maxlength="400"
               name="pictureLink"
+              required
             />
           </fieldset>
           <button type="submit" class="popup__submit" value="eddit">

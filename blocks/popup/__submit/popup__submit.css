@@ -20,6 +20,8 @@
   background-color: rgba(0, 0, 0, .8);
 }
 
+
+
 @media screen and (max-width: 768px) {
   .popup__submit {
     margin: 28px 0 0;

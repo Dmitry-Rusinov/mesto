@@ -2,7 +2,7 @@
 const buttonOpenEditProfilePopup = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('#editProfile');
 const buttonCloseEditProfilePopup = document.querySelector('.popup__closed');
-const formEditProfile = popupEditProfile.querySelector('.popup__form');
+const formEditProfile = document.querySelector('.popup__form');
 const inputNameField = document.querySelector('.popup__input_user_name');
 const inputJobField = document.querySelector('.popup__input_user_job');
 const userName = document.querySelector('.profile__info-title');
@@ -19,6 +19,17 @@ const modalImage = document.querySelector('#popupImage');
 const modalImageButtonClosed = modalImage.querySelector('.popup__closed');
 const image = modalImage.querySelector('.popup__picture');
 const imageTitle = modalImage.querySelector('.popup__image-title');
+const popupInput = formEditProfile.querySelector('.popup__input');
+
+/*const formSubmitButtonChangeState = (form) => {
+  const submitButton = form.querySelector('.popup__submit');
+  if (!form.checkValidity()) {
+    submitButton.setAttribute('disabled', true);
+  } else {
+    submitButton.removeAttribute('disabled');
+  }
+}*/
+
 
 //Реализация формы редактирования профиля
 
@@ -39,8 +50,23 @@ function submitEditProfileForm (evt) {
     evt.preventDefault(); 
     userName.textContent = inputNameField.value;
     userJob.textContent = inputJobField.value;
+/*
+    const form = evt.target;
+    if (!form.checkValidity()) {
+      console.log('good');
+    } else {
+      console.log('no good');
+    }
+*/
     closePopup(popupEditProfile);
 }
+
+formEditProfile.addEventListener('input', (evt) => {
+  const input = evt.target;
+  const form = evt.currentTarget;
+  isValid(input);
+  /*formSubmitButtonChangeState(form);*/
+}/*true*/);
 
 formEditProfile.addEventListener('submit', submitEditProfileForm);
 
@@ -109,3 +135,48 @@ addCardForm.addEventListener('submit', submitAddCard);
 
 //Кнопка закрытия модального окна изображения
 modalImageButtonClosed.addEventListener('click', () => closePopup(modalImage));
+
+popupInput.addEventListener('input', function (evt) {
+  console.log(evt.target.validity.valid);
+});
+
+//const formError = formEditProfile.querySelector(`.${popupInput.id}-error`);
+
+const showInputError = (formEditProfile, popupInput, errorMessage) => {
+  const errorElement = formEditProfile.querySelector(`.${popupInput.id}-error`);
+  popupInput.classList.add('popup__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__input-error_active');
+}
+
+const hideInputError = (formEditProfile, popupInput) => {
+  const errorElement = formEditProfile.querySelector(`.${popupInput.id}-error`);
+  popupInput.classList.remove('popup__input_type_error');
+  errorElement.classList.remove('form__input-error_active');
+  errorElement.textContent = '';
+};
+
+const isValid = (formEditProfile, popupInput) => {
+  if (!popupInput.validity.valid) {
+    // Если поле не проходит валидацию, покажем ошибку
+    showInputError(formEditProfile, popupInput, popupInput.validationMessage);
+  } else {
+    // Если проходит, скроем
+    hideInputError(formEditProfile, popupInput);
+  }
+};
+
+const setEventListeners = (formEditProfile) => {
+  const inputList = Array.from(formEditProfile.querySelectorAll('.popup__input'));
+  inputList.forEach((popupInput) => {
+    popupInput.addEventListener('input', () => isValid(formEditProfile, popupInput))
+  });
+}
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  formList.forEach((formEditProfile) => setEventListeners(formEditProfile));
+}
+
+enableValidation();
+
