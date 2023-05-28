@@ -25,9 +25,14 @@ const popupInput = formEditProfile.querySelector('.popup__input');
 
 //Реализация формы редактирования профиля
 
-const openPopup = (popupOpened) => popupOpened.classList.add('popup_opened');
+const openPopup = (popupOpened) => {
+  popupOpened.classList.add('popup_opened');
+  document.addEventListener('keydown', escButtonPopupClose);
+};
 
-const closePopup = (popupClosed) => popupClosed.classList.remove('popup_opened');
+const closePopup = (popupClosed) => {
+  popupClosed.classList.remove('popup_opened');
+};
 
 buttonOpenEditProfilePopup.addEventListener('click', () => {
   //togglePopupState(popupEditProfile);
@@ -115,6 +120,15 @@ addCardForm.addEventListener('submit', submitAddCard);
 //Кнопка закрытия модального окна изображения
 modalImageButtonClosed.addEventListener('click', () => closePopup(modalImage));
 
+/*const object = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit:disabled',
+  inputErrorClass: 'popup__input-error',
+  errorClass: 'form__input-error_active'
+};*/
+
 //Функция отвечает за показ ошибки
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -123,7 +137,6 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   errorElement.classList.add('form__input-error_active');
 }
 
-//Функция отвечает за скрытие ошибки
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove('popup__input_type_error');
@@ -142,10 +155,8 @@ const checkInputValidity = (formElement, inputElement) => {
 };
 
 const setEventListeners = (formElement) => {
-  
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   const buttonSubmitForm = formElement.querySelector('.popup__submit');
-  
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(formElement, inputElement);
@@ -154,7 +165,7 @@ const setEventListeners = (formElement) => {
   });
 }
 
-function validationCheck () {
+function enableValidation () {
   const formList = Array.from(document.querySelectorAll('.popup__form'));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
@@ -164,7 +175,7 @@ function validationCheck () {
   });
 }
 
-validationCheck();
+enableValidation();
 
 //Функция обходит массив полей и проверяет их на валидацию
 function hasInvalidInput (inputList) {
@@ -180,3 +191,17 @@ function toggleButtonState (inputList, buttonSubmitForm) {
     buttonSubmitForm.removeAttribute('disabled');
   }
 }
+
+function escButtonPopupClose (evt) {
+  if (evt.key === 'Escape') {
+    const modal = document.querySelector('.popup_opened');
+    closePopup(modal);
+  }
+}
+
+/*popupAddCard.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+  //ваша функция закрытия окна
+  closePopup(popupAddCard);
+  }
+  });*/
