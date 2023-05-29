@@ -28,10 +28,12 @@ const popupInput = formEditProfile.querySelector('.popup__input');
 const openPopup = (popupOpened) => {
   popupOpened.classList.add('popup_opened');
   document.addEventListener('keydown', escButtonPopupClose);
+  /*document.addEventListener('click', closedPopupByOverlay);*/
 };
 
 const closePopup = (popupClosed) => {
   popupClosed.classList.remove('popup_opened');
+  /*document.addEventListener('click', closedPopupByOverlay);*/
 };
 
 buttonOpenEditProfilePopup.addEventListener('click', () => {
@@ -120,15 +122,6 @@ addCardForm.addEventListener('submit', submitAddCard);
 //Кнопка закрытия модального окна изображения
 modalImageButtonClosed.addEventListener('click', () => closePopup(modalImage));
 
-/*const object = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit',
-  inactiveButtonClass: 'popup__submit:disabled',
-  inputErrorClass: 'popup__input-error',
-  errorClass: 'form__input-error_active'
-};*/
-
 //Функция отвечает за показ ошибки
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -192,6 +185,7 @@ function toggleButtonState (inputList, buttonSubmitForm) {
   }
 }
 
+// Отслеживает закрытие модального окна по нажатию кнопки Esc
 function escButtonPopupClose (evt) {
   if (evt.key === 'Escape') {
     const modal = document.querySelector('.popup_opened');
@@ -199,9 +193,20 @@ function escButtonPopupClose (evt) {
   }
 }
 
-/*popupAddCard.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-  //ваша функция закрытия окна
-  closePopup(popupAddCard);
+popupEditProfile.addEventListener("click", (evt) => {
+  if (evt.currentTarget === evt.target) {
+    closePopup(popupEditProfile)
   }
-  });*/
+})
+
+popupAddCard.addEventListener("click", (evt) => {
+  if (evt.currentTarget === evt.target) {
+    closePopup(popupAddCard)
+  }
+})
+
+modalImage.addEventListener("click", (evt) => {
+  if (evt.currentTarget === evt.target) {
+    closePopup(modalImage)
+  }
+})
