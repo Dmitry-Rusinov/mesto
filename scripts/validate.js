@@ -1,3 +1,11 @@
+const validationPropertiesObject = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'form__input-error_active'
+};
+
 //Функция отвечает за показ ошибки
 const showInputError = (formElement, inputElement, errorMessage, property) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -39,6 +47,20 @@ function hasInvalidInput (inputList) {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
+}
+
+//Функция устанавливает атрибут Disabled на кнопку
+function addButtonAttributeDisabled(button) {
+  button.setAttribute('disabled', true);
+}
+
+//Функция отвечает за блокировку кнопки Submit
+function toggleButtonState (inputList, buttonSubmitForm) {
+  if (hasInvalidInput(inputList)) {
+    addButtonAttributeDisabled(buttonSubmitForm);
+  } else {
+    buttonSubmitForm.removeAttribute('disabled');
+  }
 }
 
 function enableValidation (property) {
