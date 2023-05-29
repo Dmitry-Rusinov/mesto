@@ -50,6 +50,7 @@ function submitEditProfileForm (evt) {
     userName.textContent = inputNameField.value;
     userJob.textContent = inputJobField.value;
     closePopup(popupEditProfile);
+    evt.target.reset();
 }
 
 formEditProfile.addEventListener('submit', submitEditProfileForm);
@@ -122,60 +123,14 @@ addCardForm.addEventListener('submit', submitAddCard);
 //Кнопка закрытия модального окна изображения
 modalImageButtonClosed.addEventListener('click', () => closePopup(modalImage));
 
-//Функция отвечает за показ ошибки
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('form__input-error_active');
-}
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('form__input-error_active');
-  errorElement.textContent = '';
+const validationPropertiesObject = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'form__input-error_active'
 };
 
-//Функция проверяет валидацию полей в форме 
-//и вызывает или скрывает сообщение об ошибке
-const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonSubmitForm = formElement.querySelector('.popup__submit');
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonSubmitForm)
-    });
-  });
-}
-
-function enableValidation () {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-}
-
-enableValidation();
-
-//Функция обходит массив полей и проверяет их на валидацию
-function hasInvalidInput (inputList) {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-}
 //Функция отвечает за блокировку кнопки Submit
 function toggleButtonState (inputList, buttonSubmitForm) {
   if (hasInvalidInput(inputList)) {
