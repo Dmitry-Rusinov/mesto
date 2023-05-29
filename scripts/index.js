@@ -20,24 +20,18 @@ const modalImageButtonClosed = modalImage.querySelector('.popup__closed');
 const image = modalImage.querySelector('.popup__picture');
 const imageTitle = modalImage.querySelector('.popup__image-title');
 const popupInput = formEditProfile.querySelector('.popup__input');
-//const buttonSubmitForm = document.querySelector('.popup__submit');
-
 
 //Реализация формы редактирования профиля
-
 const openPopup = (popupOpened) => {
   popupOpened.classList.add('popup_opened');
   document.addEventListener('keydown', escButtonPopupClose);
-  /*document.addEventListener('click', closedPopupByOverlay);*/
 };
 
 const closePopup = (popupClosed) => {
   popupClosed.classList.remove('popup_opened');
-  /*document.addEventListener('click', closedPopupByOverlay);*/
 };
 
 buttonOpenEditProfilePopup.addEventListener('click', () => {
-  //togglePopupState(popupEditProfile);
   openPopup(popupEditProfile);
   inputNameField.value = userName.textContent;
   inputJobField.value = userJob.textContent;
@@ -50,7 +44,6 @@ function submitEditProfileForm (evt) {
     userName.textContent = inputNameField.value;
     userJob.textContent = inputJobField.value;
     closePopup(popupEditProfile);
-    evt.target.reset();
 }
 
 formEditProfile.addEventListener('submit', submitEditProfileForm);
