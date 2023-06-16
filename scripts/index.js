@@ -55,6 +55,7 @@ buttonOpenEditProfilePopup.addEventListener('click', () => {
   openPopup(popupEditProfile);
   inputNameField.value = userName.textContent;
   inputJobField.value = userJob.textContent;
+  formEditProfileValidation.resetValidation();
 });
 
 //Функция редактирования полей формы попапа профиля
