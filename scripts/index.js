@@ -3,12 +3,12 @@ import FormValidator from './FormValidator.js';
 import {initialCards} from './constants.js';
 
 //Попап редактирования профиля
+const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('#editProfile');
 const buttonOpenEditProfilePopup = document.querySelector('.profile__edit-button');
 const formEditProfile = popupEditProfile.querySelector('.popup__form');
 const inputNameField = document.querySelector('.popup__input_user_name');
 const inputJobField = document.querySelector('.popup__input_user_job');
-const buttonCloseEditProfilePopup = popupEditProfile.querySelector('.popup__closed');
 
 const validationPropertiesObject = {
   formSelector: '.popup__form',
@@ -32,11 +32,11 @@ const addCardForm = popupAddCard.querySelector('.popup__form');
 const inputCardDescription = document.querySelector('#card-description');
 const inputPictureLink = document.querySelector('#picture-link');
 const buttonSubmitForm = popupAddCard.querySelector('.popup__submit');
-const popupAddCardButtonClosed = popupAddCard.querySelector('.popup__closed');
 
 //Попап просмотра увеличенного изображения
 const modalImage = document.querySelector('#popupImage');
-const modalImageButtonClosed = modalImage.querySelector('.popup__closed');
+const popupImage = document.querySelector('.popup__picture');
+const popupTitle = document.querySelector('.popup__image-title');
 
 //Открывает попап и добавляет слушатель кнопки Esc
 const openPopup = (popupOpened) => {
@@ -57,9 +57,6 @@ buttonOpenEditProfilePopup.addEventListener('click', () => {
   inputJobField.value = userJob.textContent;
 });
 
-//Слушатель на кнопке закрытия попапа профиля
-buttonCloseEditProfilePopup.addEventListener('click', () => closePopup(popupEditProfile));
-
 //Функция редактирования полей формы попапа профиля
 function submitEditProfileForm (evt) {
     evt.preventDefault(); 
@@ -71,9 +68,17 @@ function submitEditProfileForm (evt) {
 //Слушатель сабмита на форме попапа профиля
 formEditProfile.addEventListener('submit', submitEditProfileForm);
 
+//Функция открывает попап увеличенного изображения
+function handleCardClick(name, link) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupTitle.textContent = name;
+  openPopup(modalImage);
+}
+
 //Функция наполнения карточки
 function createCard(data) {
-  const cardContent = new Card(data, '.card-template');
+  const cardContent = new Card(data, '.card-template', handleCardClick);
   const cardElement = cardContent.generateCard();
   return cardElement;
 }
@@ -96,10 +101,8 @@ renderInitialCards();
 //Слушатель на кнопку отрытия попапа добавления карточки
 popupAddCardButtonOpen.addEventListener('click', () => {
   openPopup(popupAddCard);
+  addCardFormValidation.resetValidation();
 });
-
-//Слушатель на кнопку закрытия попапа добавления карточки
-popupAddCardButtonClosed.addEventListener('click', () => closePopup(popupAddCard));
 
 //Функция добавления карточки
 function submitAddCard (evt) {
@@ -109,7 +112,6 @@ function submitAddCard (evt) {
     link: inputPictureLink.value
   };
   const card = createCard(objInputs);
-  buttonSubmitForm.setAttribute('disabled', true);
   renderCard(card);
   closePopup(popupAddCard);
   evt.target.reset();
@@ -117,9 +119,6 @@ function submitAddCard (evt) {
 
 //Слушатель сабмита на форме попапа добавления карточки 
 addCardForm.addEventListener('submit', submitAddCard);
-
-//Солушатель кнопки закрытия модального окна изображения
-modalImageButtonClosed.addEventListener('click', () => closePopup(modalImage));
 
 //Функция отслеживает закрытие модального окна по нажатию кнопку Esc
 function handleCloseByEsc (evt) {
@@ -129,17 +128,16 @@ function handleCloseByEsc (evt) {
   }
 }
 
-//Функция отслеживание закрытие модального окна по клику на оверлей
-const handleClickByOverlay = (evt) => {
-  if (evt.currentTarget === evt.target) { 
-    closePopup(evt.currentTarget);
-  }
-}
-
-const popupList = Array.from(document.querySelectorAll('.popup'));
-
-popupList.forEach((popup) => {
-  popup.addEventListener('click', handleClickByOverlay)
+//Закрываем попап по клику на крестик/оверлей
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup)
+        }
+        if (evt.target.classList.contains('popup__closed')) {
+          closePopup(popup)
+        }
+    })
 });
 
 //Валидация формы редактирования профиля

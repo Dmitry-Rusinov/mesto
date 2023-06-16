@@ -43,16 +43,23 @@ export default class FormValidator {
   });
 }
 
-  _addButtonAttributeDisabled() {
+  addButtonAttributeDisabled() {
     this._buttonSubmitForm.setAttribute('disabled', true);
 }
 
   _toggleButtonState() {
   if (this._hasInvalidInput()) {
-    this._addButtonAttributeDisabled();
+    this.addButtonAttributeDisabled();
   } else {
     this._buttonSubmitForm.removeAttribute('disabled');
   }
+}
+
+  resetValidation() {
+  this._toggleButtonState();
+  this._inputList.forEach((inputElement) => {
+    this._hideInputError(inputElement);
+  });
 }
 
   enableValidation() {
