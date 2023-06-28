@@ -1,8 +1,9 @@
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
+import Section from '../scripts/components/Section.js';
 import {initialCards, popups, popupEditProfile, buttonOpenEditProfilePopup, 
   formEditProfile, inputNameField, inputJobField, validationPropertiesObject,
-  userName, userJob, popupAddCardButtonOpen, cardsContainer, popupAddCard, addCardForm,
+  userName, userJob, popupAddCardButtonOpen, popupAddCard, addCardForm,
   inputCardDescription, inputPictureLink, modalImage, popupImage, popupTitle} from '../scripts/constants.js';
 import './index.css';
 
@@ -53,8 +54,21 @@ function createCard(data) {
   return cardElement;
 }
 
+const cardList = new Section ({ items: initialCards, renderer: (data) => {
+  cardList.addItem(createCard(data));
+}
+      /*(item) => {
+      const cardContent = new Card(item, '.card-template', handleCardClick);
+      const cardElement = cardContent.generateCard();
+      cardList.addItem(cardElement);
+  
+} */
+}, '.elements__card');
+
+cardList.renderer();
+
 //Функция добавления карточки на страницу
-function renderCard(card) {
+/*function renderCard(card) {
   cardsContainer.prepend(card);
 }
 
@@ -66,7 +80,7 @@ function renderInitialCards() {
   });
 }
 
-renderInitialCards();
+renderInitialCards();*/
 
 //Слушатель на кнопку отрытия попапа добавления карточки
 popupAddCardButtonOpen.addEventListener('click', () => {

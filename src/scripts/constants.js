@@ -46,9 +46,6 @@ const userName = document.querySelector('.profile__info-title');
 const userJob = document.querySelector('.profile__subtitle');
 const popupAddCardButtonOpen = document.querySelector('.profile__add-button');
 
-//Секция карточек
-const cardsContainer = document.querySelector('.elements__card');
-
 //Попап добавления карточки
 const popupAddCard = document.querySelector('#popupAddCard');
 const addCardForm = popupAddCard.querySelector('.popup__form');
@@ -62,5 +59,5 @@ const popupTitle = document.querySelector('.popup__image-title');
 
 export {initialCards, popups, popupEditProfile, buttonOpenEditProfilePopup, 
   formEditProfile, inputNameField, inputJobField, validationPropertiesObject,
-  userName, userJob, popupAddCardButtonOpen, cardsContainer, popupAddCard, addCardForm,
+  userName, userJob, popupAddCardButtonOpen, popupAddCard, addCardForm,
   inputCardDescription, inputPictureLink, modalImage, popupImage, popupTitle};
