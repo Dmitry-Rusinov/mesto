@@ -1,5 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 import {initialCards} from './constants.js';
 
 //Попап редактирования профиля
@@ -84,20 +85,33 @@ function createCard(data) {
   return cardElement;
 }
 
-//Функция добавления карточки на страницу
-function renderCard(card) {
-  cardsContainer.prepend(card);
+const cardList = new Section ({ items: initialCards, renderer: (data) => {
+  cardList.addItem(createCard(data));
 }
+      /*(item) => {
+      const cardContent = new Card(item, '.card-template', handleCardClick);
+      const cardElement = cardContent.generateCard();
+      cardList.addItem(cardElement);
+  
+} */
+}, '.elements__card');
+
+cardList.renderer();
+
+//Функция добавления карточки на страницу
+/*function renderCard(card) {
+  cardsContainer.prepend(card);
+}*/
 
 //Функция добавления карточек из JS
-function renderInitialCards() {
+/*function renderInitialCards() {
   initialCards.forEach((card) => {
     const cardContent = createCard(card);
     renderCard(cardContent);
   });
 }
 
-renderInitialCards();
+renderInitialCards();*/
 
 //Слушатель на кнопку отрытия попапа добавления карточки
 popupAddCardButtonOpen.addEventListener('click', () => {
