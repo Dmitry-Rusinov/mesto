@@ -46,7 +46,7 @@
         <p class="footer__text">© 2023 Mesto Russia</p>
       </footer>
     </div>
-    <div class="popup" id="editProfile">
+    <div class="popup popup_editProfile" id="editProfile">
       <div class="popup__container">
         <button
           type="button"
@@ -74,7 +74,7 @@
               placeholder="Дополнитерьная информация"
               minlength="2"
               maxlength="200"
-              name="job"
+              name="info"
               required
             />
             <span class="popup__input-error description-error"></span>
@@ -85,7 +85,7 @@
         </form>
       </div>
     </div>
-    <div class="popup" id="popupAddCard">
+    <div class="popup popup_addCard" id="popupAddCard">
       <div class="popup__container">
         <button
           type="button"
@@ -124,7 +124,7 @@
         </form>
       </div>
     </div>
-    <div class="popup popup_overlay" id="popupImage">
+    <div class="popup popup_overlay popup_image" id="popupImage">
       <div class="popup__image-container">
         <button
           type="button"
@@ -155,10 +155,12 @@
         </div>
       </li>
     </template>
-  
-    <script type="module" src="./scripts/Section.js"></script>
-    <script type="module" src="./scripts/FormValidator.js"></script>
-    <script type="module" src="./scripts/Card.js"></script>
-    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/components/UserInfo.js"></script>
+    <script type="module" src="./scripts/components/PopupWithForm.js"></script>
+    <script type="module" src="./scripts/components/Popup.js"></script>
+    <script type="module" src="./scripts/components/Section.js"></script>
+    <script type="module" src="./scripts/components/FormValidator.js"></script>
+    <script type="module" src="./scripts/components/Card.js"></script>
+    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
