@@ -4,7 +4,7 @@ export default class PopupWithForm extends Popup {
   constructor({popupSelector, submitForm}) {
     super(popupSelector);
     this._submitForm = submitForm;
-    this._form = document.querySelector('.popup__form');
+    this._form = this._modal.querySelector('.popup__form');
     this._inputList = this._form.querySelectorAll('.popup__input');
   }
 
@@ -26,7 +26,6 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submitForm(this._getInputValues());
-      
-    })
+    });
   }
 }
