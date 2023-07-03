@@ -1,15 +1,15 @@
 import './index.css';
 
-import Card from '../scripts/components/Card.js';
-import FormValidator from '../scripts/components/FormValidator.js';
-import Section from '../scripts/components/Section.js';
-import PopupWithForm from '../scripts/components/PopupWithForm.js';
-import UserInfo from '../scripts/components/UserInfo.js';
-import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 import {initialCards, buttonOpenEditProfilePopup, formEditProfile, inputNameField, 
   inputJobField, validationPropertiesObject, popupAddCardButtonOpen, addCardForm } 
-from '../scripts/utils/constants.js';
+from '../utils/constants.js';
 
 function getProfileInputList ({userName, userJob}) {
   inputNameField.value = userName;
@@ -44,7 +44,7 @@ const popupWithImage = new PopupWithImage ('.popup_image');
 
 popupWithImage.setEventListeners();
 
-const cardList = new Section ({ items: initialCards, renderer: createCard }, '.elements__card');
+const cardList = new Section ({ items: initialCards, renderer: (item) => cardList.addItem(createCard(item)) }, '.elements__card');
 
 cardList.renderer();
 
@@ -54,7 +54,7 @@ function createCard(data) {
   handleCardClick: () => popupWithImage.open(data.name, data.link)
   });
   const cardElement = cardContent.generateCard();
-  cardList.addItem(cardElement);
+  return cardElement;
 }
 
 //Попап с формой добавления карточки
@@ -64,7 +64,7 @@ submitForm: (item) => {
     name: item.newPlace,
     link: item.pictureLink
   };
-  createCard(objInputs);
+  cardList.addItem(createCard(objInputs));
   addCardPopup.close();
 }
 });
