@@ -44,9 +44,9 @@ const popupWithImage = new PopupWithImage ('.popup_image');
 
 popupWithImage.setEventListeners();
 
-const cardList = new Section ({ items: initialCards, renderer: (item) => cardList.addItem(createCard(item)) }, '.elements__card');
+const cardList = new Section ({renderer: (item) => cardList.addItem(createCard(item)) }, '.elements__card');
 
-cardList.renderer();
+cardList.renderer(initialCards);
 
 //Функция создания карточки
 function createCard(data) {
