@@ -3,14 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <title>Шестой проект Яндекс.Практикум "Место"</title>
+    <title>Восьмой проект Яндекс.Практикум "Место"</title>
   </head>
   <body class="page">
     <div class="content">
       <header class="header">
         <img
-          src="./images/logo.svg"
+          src="<%=require('./images/logo.svg')%>"
           alt="Логотип проекта Место.Россия"
           class="header__logo"
         />
@@ -18,7 +17,7 @@
       <main>
         <section class="profile">
           <img
-            src="./images/image.jpg"
+            src="<%=require('./images/image.jpg')%>"
             alt="Фотография пользователя"
             class="profile__avatar"
           />
@@ -155,6 +154,5 @@
         </div>
       </li>
     </template>
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>

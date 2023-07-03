@@ -1,3 +1,5 @@
+import './index.css';
+
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -66,7 +68,7 @@ submitForm: (item) => {
   addCardPopup.close();
 }
 });
-console.log(addCardPopup)
+
 addCardPopup.setEventListeners();
 
 //Слушатель на кнопку отрытия попапа добавления карточки
