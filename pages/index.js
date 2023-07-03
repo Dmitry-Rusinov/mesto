@@ -5,18 +5,18 @@ import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 
-import {initialCards, popups, popupEditProfile, buttonOpenEditProfilePopup, 
-  formEditProfile, inputNameField, inputJobField, validationPropertiesObject,
-  userSignature, userInfo, popupAddCardButtonOpen, popupAddCard, addCardForm,
-  inputCardDescription, inputPictureLink, modalImage, popupImage, popupTitle} from '../scripts/utils/constants.js';
+import {initialCards, buttonOpenEditProfilePopup, formEditProfile, inputNameField, 
+  inputJobField, validationPropertiesObject, popupAddCardButtonOpen, addCardForm } 
+from '../scripts/utils/constants.js';
 
-function profileInputList ({userName, userJob}) {
+function getProfileInputList ({userName, userJob}) {
   inputNameField.value = userName;
   inputJobField.value = userJob; 
 };  
 
 const inputListProfile = new UserInfo ({userName: '.profile__info-title', userJob: '.profile__subtitle'});
 
+//Попап с формой редактирования профиля
 const editProfilePopup = new PopupWithForm ({popupSelector: '.popup_editProfile',
  submitForm: (item) => {
   inputListProfile.setUserInfo(item);
@@ -29,13 +29,14 @@ editProfilePopup.setEventListeners();
 //Слушатель на кнопке открытия попапа профиля
 buttonOpenEditProfilePopup.addEventListener('click', () => {
   const data = inputListProfile.getUserInfo();
-  profileInputList({
+  getProfileInputList({
     userName: data.userName,
     userJob: data.userJob
   })
   editProfilePopup.open();
   formEditProfileValidation.resetValidation();
 });
+
 //Попап с картинкой
 const popupWithImage = new PopupWithImage ('.popup_image');
 
@@ -73,22 +74,6 @@ popupAddCardButtonOpen.addEventListener('click', () => {
   addCardPopup.open();
   addCardFormValidation.resetValidation();
 });
-
-//Функция добавления карточки
-/*function submitAddCard (evt) {
-  evt.preventDefault();
-  const objInputs = {
-    name: inputCardDescription.value,
-    link: inputPictureLink.value
-  };
-  const card = createCard(objInputs);
-  addItem(card);
-  closePopup(popupAddCard);
-  evt.target.reset();
-}*/
-
-//Слушатель сабмита на форме попапа добавления карточки 
-//addCardForm.addEventListener('submit', submitAddCard);
 
 //Валидация формы редактирования профиля
 const formEditProfileValidation = new FormValidator(validationPropertiesObject, formEditProfile);

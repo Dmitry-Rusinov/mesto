@@ -1,3 +1,4 @@
+//Массив объектов инициализации карточек на страницу
 const initialCards = [
   {
     name: 'Метро',
@@ -25,14 +26,17 @@ const initialCards = [
   }
 ];
 
-//Попап редактирования профиля
-const popups = document.querySelectorAll('.popup');
-const popupEditProfile = document.querySelector('#editProfile');
+//Кнопки открытия попапов
 const buttonOpenEditProfilePopup = document.querySelector('.profile__edit-button');
+const popupAddCardButtonOpen = document.querySelector('.profile__add-button');
+//Попапы и формы
+const popupEditProfile = document.querySelector('#editProfile');
 const formEditProfile = popupEditProfile.querySelector('.popup__form');
+const popupAddCard = document.querySelector('#popupAddCard');
+const addCardForm = popupAddCard.querySelector('.popup__form');
 const inputNameField = document.querySelector('.popup__input_user_name');
 const inputJobField = document.querySelector('.popup__input_user_job');
-
+//Объект настройки валидации форм
 const validationPropertiesObject = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -41,27 +45,6 @@ const validationPropertiesObject = {
   errorClass: 'form__input-error_active'
 };
 
-//Секция профиля
-const userSignature = document.querySelector('.profile__info-title');
-const userInfo = document.querySelector('.profile__subtitle');
-const popupAddCardButtonOpen = document.querySelector('.profile__add-button');
-
-//Секция карточек
-const cardsContainer = document.querySelector('.elements__card');
-
-//Попап добавления карточки
-const popupAddCard = document.querySelector('#popupAddCard');
-const addCardForm = popupAddCard.querySelector('.popup__form');
-const inputCardDescription = document.querySelector('#card-description');
-const inputPictureLink = document.querySelector('#picture-link');
-const buttonSubmitForm = popupAddCard.querySelector('.popup__submit');
-
-//Попап просмотра увеличенного изображения
-const modalImage = document.querySelector('#popupImage');
-const popupImage = document.querySelector('.popup__picture');
-const popupTitle = document.querySelector('.popup__image-title');
-
-export {initialCards, popups, popupEditProfile, buttonOpenEditProfilePopup, 
+export {initialCards, buttonOpenEditProfilePopup, 
   formEditProfile, inputNameField, inputJobField, validationPropertiesObject,
-  userSignature, userInfo, popupAddCardButtonOpen, popupAddCard, addCardForm,
-  inputCardDescription, inputPictureLink, modalImage, popupImage, popupTitle};
+   popupAddCardButtonOpen, addCardForm};
