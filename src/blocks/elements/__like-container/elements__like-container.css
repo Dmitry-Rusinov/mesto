@@ -1,0 +1,6 @@
+.elements__like-container {
+  display: block;
+  flex-direction: column;
+  height: 35px;
+  border: 1px solid red;
+}

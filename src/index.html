@@ -16,6 +16,7 @@
       </header>
       <main>
         <section class="profile">
+          <button type="button" class="profile__edit-avatar" title="Кнопка редактирования аватара"></button>
           <img
             src="<%=require('./images/image.jpg')%>"
             alt="Фотография пользователя"
@@ -123,6 +124,49 @@
         </form>
       </div>
     </div>
+    <div class="popup popup_edit-avatar" id="popupEditAvatar">
+      <div class="popup__container">
+        <button
+          type="button"
+          class="popup__closed"
+          title="Кнопка закрытия формы"
+        ></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form name="editAvatar" class="popup__form" novalidate>
+          <fieldset class="popup__content">
+            <input
+              class="popup__input"
+              id="avatar-link"
+              type="url"
+              placeholder="Ссылка на аватар пользователя"
+              minlength="1"
+              maxlength="400"
+              name="avatarLink"
+              required
+            />
+            <span class="popup__input-error avatar-link-error"></span>
+          </fieldset>
+          <button type="submit" class="popup__submit" value="eddit" disabled="true">
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_deleteCard" id="popupDeleteCard">
+      <div class="popup__container">
+        <button
+          type="button"
+          class="popup__closed"
+          title="Кнопка закрытия формы"
+        ></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form name="confirm" class="popup__form-confirm"></form>
+        <button type="submit" class="popup__submit" value="delete">
+          Да
+        </button>
+      </form>
+      </div>
+    </div>
     <div class="popup popup_overlay popup_image" id="popupImage">
       <div class="popup__image-container">
         <button
@@ -145,11 +189,14 @@
         <div class="elements__description">
           <div class="elements__container">
             <h2 class="elements__title"></h2>
+            <div class="elements__like-container">
             <button
               type="button"
               title="Кнопка лайка картинки"
               class="elements__button-like"
             ></button>
+            <p class="elements__likes-counter">0</p>
+          </div>
           </div>
         </div>
       </li>
