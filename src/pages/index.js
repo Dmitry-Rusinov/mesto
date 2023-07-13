@@ -40,15 +40,12 @@ from '../utils/constants.js';
       'Content-Type': 'application/json'
     }
   }); 
-  console.log(api.getInitialCards());
-  console.log(api.getUserInfo());
 
   const arrCards = api.getInitialCards();
   const userInfo = api.getUserInfo();
 
   Promise.all([arrCards, userInfo]).then(([cardsData, userData]) => {
     cardList.renderer(cardsData);
-    //cardList.addItem(cardsData);
     inputListProfile.setUserInfo(userData);
   })
 
@@ -74,6 +71,8 @@ console.log(objInputs);
 }
 });
 
+editAvatarPopup.setEventListeners();
+
 //Слушатель на кнопке редактирования аватара профиля
 popupEditAvatarButtonOpen.addEventListener('click', () => {
   editAvatarPopup.open();
@@ -84,6 +83,7 @@ popupEditAvatarButtonOpen.addEventListener('click', () => {
 const editProfilePopup = new PopupWithForm ({popupSelector: '.popup_editProfile',
  submitForm: (item) => {
   inputListProfile.setUserInfo(item);
+  api.sendUserInfo(item);
   editProfilePopup.close();
 }
 });

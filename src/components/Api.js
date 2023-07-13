@@ -31,4 +31,15 @@ export default class Api {
   updateAvatar() {
 
   }
+
+  sendUserInfo(data) {
+    fetch(`${this._baseUrl}/users/me`, {
+  method: 'PATCH',
+  headers: this._headers,
+  body: JSON.stringify({
+    name: data.name,
+    about: data.about
+  })
+});
+  }
 }
