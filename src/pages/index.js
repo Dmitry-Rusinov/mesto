@@ -6,13 +6,14 @@ import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithConfirmation from '../components/PopupWithConfirmation';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
+import Api from '../components/Api.js';
 
-import {initialCards, buttonOpenEditProfilePopup, formEditProfile, inputNameField, formEditAvatarProfile,
+import {buttonOpenEditProfilePopup, formEditProfile, inputNameField, formEditAvatarProfile,
   inputJobField, validationPropertiesObject, popupAddCardButtonOpen, addCardForm, popupEditAvatarButtonOpen} 
 from '../utils/constants.js';
 
-fetch('https://mesto.nomoreparties.co/v1/cohort-71/cards', {
+/*fetch('https://mesto.nomoreparties.co/v1/cohort-71/cards', {
   headers: {
     authorization: '03ed5ff2-8963-4b3f-9a71-48eed9962646'
   }
@@ -20,9 +21,9 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-71/cards', {
   .then(res => res.json())
   .then((result) => {
     console.log(result);
-  });
+  });*/
 
-  fetch('https://mesto.nomoreparties.co/v1/cohort-71/users/me', {
+  /*fetch('https://mesto.nomoreparties.co/v1/cohort-71/users/me', {
   headers: {
     authorization: '03ed5ff2-8963-4b3f-9a71-48eed9962646'
   }
@@ -30,7 +31,26 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-71/cards', {
   .then(res => res.json())
   .then((result) => {
     console.log(result);
-  });
+  });*/
+
+  const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-71',
+    headers: {
+      authorization: '03ed5ff2-8963-4b3f-9a71-48eed9962646',
+      'Content-Type': 'application/json'
+    }
+  }); 
+  console.log(api.getInitialCards());
+  console.log(api.getUserInfo());
+
+  const arrCards = api.getInitialCards();
+  const userInfo = api.getUserInfo();
+
+  Promise.all([arrCards, userInfo]).then(([cardsData, userData]) => {
+    cardList.renderer(cardsData);
+    //cardList.addItem(cardsData);
+    inputListProfile.setUserInfo(userData);
+  })
 
 function getProfileInputList ({userName, userJob}) {
   inputNameField.value = userName;
@@ -87,8 +107,6 @@ const popupWithImage = new PopupWithImage ('.popup_image');
 popupWithImage.setEventListeners();
 
 const cardList = new Section ({renderer: (item) => cardList.addItem(createCard(item)) }, '.elements__card');
-
-cardList.renderer(initialCards);
 
 //Функция создания карточки
 function createCard(data) {

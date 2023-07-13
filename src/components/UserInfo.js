@@ -13,6 +13,6 @@ export default class UserInfo {
 
   setUserInfo(obj) {
     this._userName.textContent = obj.name;
-    this._userJob.textContent = obj.info;
+    this._userJob.textContent = obj.about;
   }
 }
