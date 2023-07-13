@@ -13,26 +13,6 @@ import {buttonOpenEditProfilePopup, formEditProfile, inputNameField, formEditAva
   inputJobField, validationPropertiesObject, popupAddCardButtonOpen, addCardForm, popupEditAvatarButtonOpen} 
 from '../utils/constants.js';
 
-/*fetch('https://mesto.nomoreparties.co/v1/cohort-71/cards', {
-  headers: {
-    authorization: '03ed5ff2-8963-4b3f-9a71-48eed9962646'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });*/
-
-  /*fetch('https://mesto.nomoreparties.co/v1/cohort-71/users/me', {
-  headers: {
-    authorization: '03ed5ff2-8963-4b3f-9a71-48eed9962646'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });*/
-
   const api = new Api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-71',
     headers: {
@@ -129,6 +109,7 @@ submitForm: (item) => {
     link: item.pictureLink
   };
   cardList.addItem(createCard(objInputs));
+  api.sendUserCard(objInputs);
   addCardPopup.close();
 }
 });

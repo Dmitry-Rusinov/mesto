@@ -39,7 +39,18 @@ export default class Api {
   body: JSON.stringify({
     name: data.name,
     about: data.about
-  })
-});
+      })
+    });
+  }
+
+  sendUserCard(data) {
+    fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+          })
+        });
   }
 }
