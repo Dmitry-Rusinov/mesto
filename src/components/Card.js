@@ -3,6 +3,7 @@ export default class Card {
   constructor({data, templateSelector, handleCardClick, handleIconDeleteCard}) {
     this._name = data.name;
     this._link = data.link;
+    this._cardId = data._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._hadleIconDeleteCard = handleIconDeleteCard;
@@ -31,7 +32,7 @@ export default class Card {
     this._buttonLike.addEventListener('click', 
     () => this._toggleLike());
     this._buttonDelete.addEventListener('click', 
-    () => /*this._deleteCard());*/this._hadleIconDeleteCard());
+    () => this._hadleIconDeleteCard(this._cardId));
     this._image.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     });

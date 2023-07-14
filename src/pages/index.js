@@ -92,9 +92,16 @@ const cardList = new Section ({renderer: (item) => cardList.addItem(createCard(i
 function createCard(data) {
   const cardContent = new Card ({ data: data, templateSelector: '.card-template', 
   handleCardClick: () => popupWithImage.open(data.name, data.link),
-  handleIconDeleteCard: () => {
+  handleIconDeleteCard: (cardId) => {
     popupConfirmationRemove.open();
-    popupConfirmationRemove.handleDeleteCard();
+    popupConfirmationRemove.handleDeleteCard(() => {
+      api.deleteCard(cardId)
+      .then(() => {
+        popupConfirmationRemove.close();
+        cardContent.deleteCard();
+      })
+      .catch((err) => console.log('Ошибка:', `${err}`))
+    });
   }
   });
   const cardElement = cardContent.generateCard();
