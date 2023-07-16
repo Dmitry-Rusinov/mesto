@@ -28,6 +28,7 @@ from '../utils/constants.js';
   Promise.all([arrCards, userInfo])
   .then(([cardsData, userData]) => {
     inputListProfile.setUserInfo(userData);
+    inputListProfile.setAvatar(userData);
     userId = userData._id;
     cardList.renderer(cardsData);
     console.log(userId)
@@ -38,7 +39,7 @@ function getProfileInputList ({userName, userJob}) {
   inputJobField.value = userJob; 
 };  
 
-const inputListProfile = new UserInfo ({userName: '.profile__info-title', userJob: '.profile__subtitle'});
+const inputListProfile = new UserInfo ({userName: '.profile__info-title', userJob: '.profile__subtitle', userAvatar: '.profile__avatar'});
 
 //Попап с подтверждением удаления карточки
 const popupConfirmationRemove = new PopupWithConfirmation ({popupSelector: '.popup_deleteCard'})
@@ -48,10 +49,16 @@ popupConfirmationRemove.setEventListeners();
 //Попап с формой редактирования аватара профиля
 const editAvatarPopup = new PopupWithForm ({popupSelector: '.popup_edit-avatar',
 submitForm: (item) => {
-  const objInputs = {
-  link: item.avatarLink
+  api.updateAvatar(item)
+  .then((data) => {
+    inputListProfile.setAvatar(data);
+    editAvatarPopup.close();
+  })
+  .catch((err) => console.log(`Ошибка: ${err}`))
+  /*const objInputs = {
+  avatar: item.avatarLink
 };
-console.log(objInputs);
+console.log(objInputs);*/
 }
 });
 
