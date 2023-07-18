@@ -27,13 +27,15 @@ from '../utils/constants.js';
 
   Promise.all([arrCards, userInfo])
   .then(([cardsData, userData]) => {
+    cardsData.reverse();
     inputListProfile.setUserInfo(userData);
     inputListProfile.setAvatar(userData);
     userId = userData._id;
     cardList.renderer(cardsData);
   })
+  .catch((err) => console.log(`Ошибка: ${err}`))
 
-function getProfileInputList ({userName, userJob}) {
+function setProfileInputValues ({userName, userJob}) {
   inputNameField.value = userName;
   inputJobField.value = userJob; 
 };  
@@ -48,13 +50,14 @@ popupConfirmationRemove.setEventListeners();
 //Попап с формой редактирования аватара профиля
 const editAvatarPopup = new PopupWithForm ({popupSelector: '.popup_edit-avatar',
 submitForm: (item) => {
-  editAvatarPopup.whileDataLoading('Сохранение...');
+  editAvatarPopup.setSubmitButtonText('Сохранение...');
   api.updateAvatar(item)
   .then((data) => {
     inputListProfile.setAvatar(data);
     editAvatarPopup.close();
   })
   .catch((err) => console.log(`Ошибка: ${err}`))
+  .finally(() => editAvatarPopup.setSubmitButtonText('Сохранить'))
 }
 });
 
@@ -69,17 +72,17 @@ popupEditAvatarButtonOpen.addEventListener('click', () => {
 //Попап с формой редактирования профиля
 const editProfilePopup = new PopupWithForm ({popupSelector: '.popup_editProfile',
  submitForm: (data) => {
-  editProfilePopup.whileDataLoading('Сохранение...');
+  editProfilePopup.setSubmitButtonText('Сохранение...');
   api.sendUserInfo({
     name: data.name,
     about: data.about
   })
   .then(() => {
     inputListProfile.setUserInfo(data);
+    editProfilePopup.close();
   })
   .catch((err) => console.log(`Ошибка: ${err}`))
-
-  editProfilePopup.close();
+  .finally(() => editProfilePopup.setSubmitButtonText('Сохранить'))
 }
 });
 
@@ -88,7 +91,7 @@ editProfilePopup.setEventListeners();
 //Слушатель на кнопке открытия попапа профиля
 buttonOpenEditProfilePopup.addEventListener('click', () => {
   const data = inputListProfile.getUserInfo();
-  getProfileInputList({
+  setProfileInputValues({
     userName: data.userName,
     userJob: data.userJob
   })
@@ -143,13 +146,14 @@ function createCard(data) {
 //Попап с формой добавления карточки
 const addCardPopup = new PopupWithForm ({popupSelector: '.popup_addCard',
 submitForm: (data) => {
-  addCardPopup.whileDataLoading('Сохранение...');
+  addCardPopup.setSubmitButtonText('Сохранение...');
   api.sendUserCard(data)
       .then((res) => {
         cardList.addItem(createCard(res));
         addCardPopup.close();
       })
-      .catch((err) => console.log(`Ошибка: ${err}`))   
+      .catch((err) => console.log(`Ошибка: ${err}`))  
+      .finally(() => addCardPopup.setSubmitButtonText('Сохранить')) 
 }
 });
 

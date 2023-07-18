@@ -12,8 +12,7 @@
   "author": "Dmitry Rusinov",
   "license": "ISC",
   "dependencies": {
-    "core-js": "^3.31.0",
-    "jquery": "^3.7.0"
+    "core-js": "^3.31.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
