@@ -28,6 +28,7 @@ export default class Card {
   generateCard() {
     this._setEventListeners();
     this.setLikeCard(this._likes);
+    this._checkOwnerCard();
     this._image.src = this._link;
     this._image.alt = this._name;
     this._element.querySelector('.elements__title').textContent = this._name;

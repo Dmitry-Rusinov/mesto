@@ -31,7 +31,6 @@ from '../utils/constants.js';
     inputListProfile.setAvatar(userData);
     userId = userData._id;
     cardList.renderer(cardsData);
-    console.log(userId)
   })
 
 function getProfileInputList ({userName, userJob}) {
@@ -49,6 +48,7 @@ popupConfirmationRemove.setEventListeners();
 //Попап с формой редактирования аватара профиля
 const editAvatarPopup = new PopupWithForm ({popupSelector: '.popup_edit-avatar',
 submitForm: (item) => {
+  editAvatarPopup.whileDataLoading('Сохранение...');
   api.updateAvatar(item)
   .then((data) => {
     inputListProfile.setAvatar(data);
@@ -69,6 +69,7 @@ popupEditAvatarButtonOpen.addEventListener('click', () => {
 //Попап с формой редактирования профиля
 const editProfilePopup = new PopupWithForm ({popupSelector: '.popup_editProfile',
  submitForm: (data) => {
+  editProfilePopup.whileDataLoading('Сохранение...');
   api.sendUserInfo({
     name: data.name,
     about: data.about
@@ -123,19 +124,15 @@ function createCard(data) {
     {
     api.deleteLikeCard(cardId)
     .then((res) => {
-      console.log(res)
       cardContent.setLikeCard(res.likes)
     })
     .catch((err) => console.log(`Ошибка: ${err}`))
-    console.log(cardId)
   } else {
     api.setLikeCard(cardId)
     .then((res) => {
       cardContent.setLikeCard(res.likes)
-      console.log(res)
     })
     .catch((err) => console.log(`Ошибка: ${err}`))
-    console.log(cardId)
   }
   }
   });
@@ -146,6 +143,7 @@ function createCard(data) {
 //Попап с формой добавления карточки
 const addCardPopup = new PopupWithForm ({popupSelector: '.popup_addCard',
 submitForm: (data) => {
+  addCardPopup.whileDataLoading('Сохранение...');
   api.sendUserCard(data)
       .then((res) => {
         cardList.addItem(createCard(res));

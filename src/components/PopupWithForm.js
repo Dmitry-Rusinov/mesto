@@ -28,4 +28,8 @@ export default class PopupWithForm extends Popup {
       this._submitForm(this._getInputValues());
     });
   }
+
+  whileDataLoading(saving) {
+    this._form.querySelector('.popup__submit').textContent = saving;
+  }
 }
