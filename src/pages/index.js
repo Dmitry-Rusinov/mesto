@@ -55,10 +55,6 @@ submitForm: (item) => {
     editAvatarPopup.close();
   })
   .catch((err) => console.log(`Ошибка: ${err}`))
-  /*const objInputs = {
-  avatar: item.avatarLink
-};
-console.log(objInputs);*/
 }
 });
 
@@ -121,6 +117,26 @@ function createCard(data) {
       })
       .catch((err) => console.log(`Ошибка: ${err}`))
     });
+  },
+  handleLikeCard: (cardId) => {
+    if(cardContent.checkLikeOwner()) 
+    {
+    api.deleteLikeCard(cardId)
+    .then((res) => {
+      console.log(res)
+      cardContent.setLikeCard(res.likes)
+    })
+    .catch((err) => console.log(`Ошибка: ${err}`))
+    console.log(cardId)
+  } else {
+    api.setLikeCard(cardId)
+    .then((res) => {
+      cardContent.setLikeCard(res.likes)
+      console.log(res)
+    })
+    .catch((err) => console.log(`Ошибка: ${err}`))
+    console.log(cardId)
+  }
   }
   });
   const cardElement = cardContent.generateCard();
@@ -132,12 +148,7 @@ const addCardPopup = new PopupWithForm ({popupSelector: '.popup_addCard',
 submitForm: (data) => {
   api.sendUserCard(data)
       .then((res) => {
-        cardList.addItem(createCard({
-          name: res.name,
-          link: res.link,
-          cardId: res._id,
-          owner: res.owner
-        }));
+        cardList.addItem(createCard(res));
         addCardPopup.close();
       })
       .catch((err) => console.log(`Ошибка: ${err}`))   
