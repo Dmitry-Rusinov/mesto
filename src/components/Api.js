@@ -15,14 +15,14 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, { 
       headers: this._headers
     })
-    .then(res => this._checkQueryResult(res))
+    .then(this._checkQueryResult)
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-    .then(res => this._checkQueryResult(res))
+    .then(this._checkQueryResult)
   }
   
   updateAvatar(data) {
@@ -33,7 +33,7 @@ export default class Api {
         avatar: data.avatarLink,
           })
         })
-        .then(res => this._checkQueryResult(res))
+        .then(this._checkQueryResult)
   }
 
   sendUserInfo(data) {
@@ -45,7 +45,7 @@ export default class Api {
     about: data.about
       })
     })
-    .then(res => this._checkQueryResult(res))
+    .then(this._checkQueryResult)
   }
 
   sendUserCard(data) {
@@ -57,7 +57,7 @@ export default class Api {
         link: data.pictureLink
           })
         })
-        .then(res => this._checkQueryResult(res))
+        .then(this._checkQueryResult)
   }
 
   deleteCard(cardId) {
@@ -65,7 +65,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
         })
-        .then(res => this._checkQueryResult(res))
+        .then(this._checkQueryResult)
   }
 
   setLikeCard(cardId) {
@@ -73,7 +73,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers,
         })
-        .then(res => this._checkQueryResult(res))
+        .then(this._checkQueryResult)
   }
 
   deleteLikeCard(cardId) {
@@ -81,6 +81,6 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
         })
-        .then(res => this._checkQueryResult(res))
+        .then(this._checkQueryResult)
   }
 }

@@ -153,7 +153,7 @@ submitForm: (data) => {
         addCardPopup.close();
       })
       .catch((err) => console.log(`Ошибка: ${err}`))  
-      .finally(() => addCardPopup.setSubmitButtonText('Сохранить')) 
+      .finally(() => addCardPopup.setSubmitButtonText('Создать')) 
 }
 });
 
